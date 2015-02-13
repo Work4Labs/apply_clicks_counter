@@ -3,7 +3,7 @@ SOURCES=display_text.cc
 OBJECTS=$(SOURCES:.cc=.o)
 EXECUTABLE=display_text.app
 ROOT_DIR = $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-PYTHONHOME ?= $(ROOT_DIR)/venv/
+PYTHONHOME ?= $(ROOT_DIR)/venv
 
 ACTIVATE_VENV = source $(PYTHONHOME)/bin/activate
 PY_RUNNER = ${ACTIVATE_VENV} &&
@@ -58,7 +58,10 @@ run:
 
 symlink:
 	@echo "Symlinking timer to systemd..."
-	rm /etc/systemd/system/ac-counter.timer
+	@if [ -a /etc/systemd/system/ac-counter.timer ]; \
+	then \
+		rm /etc/systemd/system/ac-counter.timer; \
+	fi;
 	ln -s $(ROOT_DIR)/apply_clicks_counter/ac-counter.timer /etc/systemd/system/ac-counter.timer
 
 venv:
