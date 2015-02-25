@@ -42,8 +42,8 @@ class RequestThread(StoppableThread):
     @staticmethod
     def get_apply_clicks():
         try:
-            res = get('https://www.random.org/integers/?num=1&min=1&max=60000&col=1&base=10&format=plain&rnd=new')
-            # res = get('https://w4u-test-app.work4labs.com/w4d/api/v1/global/stats?format=json')
+            #res = get('https://www.random.org/integers/?num=1&min=1&max=60000&col=1&base=10&format=plain&rnd=new')
+            res = get('https://w4u-test-app.work4labs.com/w4d/api/v1/global/stats?format=json')
         except RequestException as e:
             logging.error('RequestException: %s', e)
             return None
